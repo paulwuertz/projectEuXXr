@@ -9,9 +9,10 @@ My solutions for project E. Don't tell anyone ;) And try to solve it yourself th
 
 ### Get all puzzles
 
-'''bash
+```bash
+mkdir -p unsolved
 pip install html2text beautifulsoup4
 python getPuzzle 1 620
-'''
+```
 
 Be carful, it will override all your files in the unsolved folder!!!
