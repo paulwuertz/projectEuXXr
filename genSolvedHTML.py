@@ -1,5 +1,4 @@
 import os
-#[create an anchor](#anchors-in-markdown)
 
 readme="""
 * [Problem 1-50](#Problem-1)
@@ -9,8 +8,8 @@ readme="""
 ---"""
 
 for file in sorted(os.listdir("solved")):
-    readme+="\n\n(###Problem-"+file.replace(".c","")+")\n\n"
-    readme+=open("solved/"+file).read().split("*/")[0].replace("/*","")
+    readme+="\n\n###Problem-"+file.replace(".c","")+"\n\n"
+    readme+=open("solved/"+file).read().split("*/")[0].replace("/*","")+"\n\n---"
 
 f=open("solved/README.md","w")
 f.write(readme)

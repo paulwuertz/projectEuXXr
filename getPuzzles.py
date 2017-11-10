@@ -18,5 +18,17 @@ for pr in range(fr,to+1):
     
     f=open("unsolved/"+str(pr)+".c","w")
     f.write("/*")
-    f.write(html2text.html2text(str(pzHTML)))
+    f.write(html2text.html2text(str(pzHTML[0]).strip()))
     f.write("*/")
+
+    f.write("""
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <math.h>
+
+int main(int argc, char const *argv[]){
+    long int a = atoi(argv[1]);
+    return 0;
+}
+    """)
