@@ -22,7 +22,7 @@ int main(void)
     FILE * fp;
     char * line = NULL;
     size_t len = 0;
-    ssize_t read;
+    size_t read;
 
     fp = fopen("99.txt", "r");
     if (fp == NULL) exit(EXIT_FAILURE);

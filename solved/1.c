@@ -5,7 +5,7 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 ---
 
-Just a loop and a contition, boring...
+Just a loop and a condition, boring...
 */
 #include <stdio.h>
 #include <stdlib.h>

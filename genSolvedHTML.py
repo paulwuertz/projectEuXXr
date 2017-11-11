@@ -8,9 +8,17 @@ readme="""
 
 ---"""
 
-for file in sorted(os.listdir("solved")):
-    readme+="\n\n### Problem-"+file.replace(".c","")+"\n\n"
-    readme+=open("solved/"+file).read().split("*/")[0].replace("/*","")+"\n\n---"
+def numSort(a):
+    try:
+        a=a.replace(".c","")
+        return int(a)
+    except Exception: return -1
+
+for file in sorted(os.listdir("solved"),key=numSort):
+    print(file)
+    if file!="README.md":
+        readme+="\n\n### Problem-"+file.replace(".c","")+"\n\n"
+        readme+=open("solved/"+file).read().split("*/")[0].replace("/*","")+"\n\n---"
 
 f=open("solved/README.md","w")
 f.write(readme)

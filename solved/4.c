@@ -5,6 +5,10 @@ from the product of two 2-digit numbers is 9009 = 91 × 99.
 
 Find the largest palindrome made from the product of two 3-digit numbers.
 
+---
+
+Gets nth digit by dividing ints by powers nth power of 10,
+then compares digit i with len-i for i..len/2
 */
 
 #include <stdio.h>

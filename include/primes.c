@@ -1,35 +1,30 @@
-/*
-2520 is the smallest number that can be divided by each of the numbers from 1
-to 10 without any remainder.
+#include "primes.h"
 
-What is the smallest positive number that is evenly divisible by all of the
-numbers from 1 to 20?
-
----
-
-Makes a doubly linked list of two numbers primfactors,
-then compares each of the factors and takes the maximum of each
-to calc their smallest common multiple c.
-
-The c and the next number are processed till 20 is reached.
-For some reason only works till finding the scm of 1..30 and for 31
-*/
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <math.h>
-
-//doubly linked list for prim number list
-typedef struct primFactor {
-    long long int val;
-    long long int pow;
-    struct primFactor *next,*prev;
-} primFactor;
-
-
-void freePrimfactors(primFactor* p);
-
+//the return value, is weather the number is prim(1) or nonprim(0)
+int isPrim_int(int num){
+    if(num%2==0) return 0;
+    int sqr=sqrt(num);
+    for (int i = 3; i < sqr+1; i+=2){
+        if (num%i==0) return 0;
+    }
+    return 1;
+}
+int isPrim_lint(long int num){
+    if(num%2==0) return 0;
+    long int sqr=sqrtl(num);
+    for (long int i = 3; i < sqr+1; i+=2){
+        if (num%i==0) return 0;
+    }
+    return 1;
+}
+int isPrim_llint(long long int num){
+    if(num%2==0) return 0;
+    long long int sqr=sqrt(num);
+    for (long long int i = 3; i < sqr+1; i+=2){
+        if (num%i==0) return 0;
+    }
+    return 1;
+}
 
 //adds one new primfactor to the end of p
 //the p list is circular
@@ -110,17 +105,4 @@ void freePrimfactors(primFactor* p){
         free(n->prev);
     }
     //free(p); 
-}
-
-int main(int argc, char const *argv[]){
-    //read Number to calc to
-    long long int a = atoi(argv[1]);
-   
-    //calcs common KGV from 2..a
-    long long int c=2;
-    for (long long int i = 3; i <= a; ++i){
-        c=getKGV(c,i);
-    }
-    printf("%lli\n", c);
-    return 0;
 }

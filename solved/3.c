@@ -3,6 +3,14 @@
 The prime factors of 13195 are 5, 7, 13 and 29.
 
 What is the largest prime factor of the number 600851475143 ?
+
+---
+
+Uses some recursive function and a global var.
+The number gets broken down recursivly, when it is dividible by some number
+and the new bound get calculated by the sqrt of the result. Tests divisor and result
+for being a prime and updates the global var BIGGEST accordingly.
+
 */
 #include <stdio.h>
 #include <math.h>
