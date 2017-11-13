@@ -4,6 +4,9 @@
 * [Problem 151-200](#problems-151-201)
 
 
+
+
+
 ## Problems-1-50
 
 |  Problem 1x | Problem 2x | Problem 3x | Problem 4x | Problem 5x |
@@ -285,6 +288,55 @@ in .2 secounds.
 
 Using primfactors you only have a divide loop till sqrt(n) instead of n/2 or n/4 divisions
 for the simple loop, giving you a speedup for the solution of more then 2000.
+
+
+
+---
+
+### Problem-14
+
+The following iterative sequence is defined for the set of positive integers:
+
+n → n/2 (n is even)  
+n → 3n \+ 1 (n is odd)
+
+Using the rule above and starting with 13, we generate the following sequence:
+
+13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1
+
+It can be seen that this sequence (starting at 13 and finishing at 1) contains
+10 terms. Although it has not been proved yet (Collatz Problem), it is thought
+that all starting numbers finish at 1.
+
+Which starting number, under one million, produces the longest chain?
+
+**NOTE:** Once the chain starts the terms are allowed to go above one million.
+
+---
+
+Using recursiv colatz function with long long int,
+checking if n is even and n/2<the current biggest gave speedup by factor ~2
+
+
+
+---
+
+### Problem-15
+
+Starting in the top left corner of a 2×2 grid, and only being able to move to
+the right and down, there are exactly 6 routes to the bottom right corner.
+
+![](project/images/p015.gif)
+
+How many such routes are there through a 20×20 grid?
+
+---
+
+Did this riddle some years ago in school, really like it ;)
+
+There is only one possibility for the sides so, first row and col are all = 1
+the rest is the sum of the possibilities above and left from the gridpoint
+the resulting number over the grid form the triangle of pascal :)
 
 
 
