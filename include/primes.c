@@ -30,7 +30,6 @@ int isPrim_llint(long long int num){
 //the p list is circular
 void addPrimfactor(long long int num,primFactor* p){
     primFactor* n=malloc(sizeof(primFactor));
-    //printf("new i %lu\n", num);
     //next element
     n->val=num;
     n->pow=1;
@@ -62,7 +61,6 @@ primFactor* getPrimfactors(long long int num){
            //test i again, if pow>1
            num/=i;
            i--;
-       }  //else {printf("%lu %lu nono\n", i,num);}
     }
     if(num!=1) addPrimfactor(num,p);
     return p;
@@ -100,9 +98,9 @@ long long int getKGV(long long int numA,long long int numB){
 // frees all the members of the primfactors
 void freePrimfactors(primFactor* p){
     primFactor *n=p->next;
+    free(p);
     while(n!=p){
         n=n->next;
         free(n->prev);
     }
-    //free(p); 
 }
