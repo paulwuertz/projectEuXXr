@@ -71,7 +71,6 @@ int getNumDivisorsSimple(int num){
 int main(int argc, char const *argv[]){
     long int a = atoi(argv[1]);
 
-
     //using Primefactors
     int num=1;
     clock_t start = clock();

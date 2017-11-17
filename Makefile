@@ -1,23 +1,19 @@
-NUMBERS := $(shell ls solved| sed 's/\(.*\)\..*/\1/')
-FILES := $(shell ls solved)
-.PHONY: all ${FILES}
+NUMBERS := $(shell ls solved/*c | xargs -n1 basename | sed 's/\(.*\)\..*/\1/')
+FILES := $(shell ls solved/*.c | xargs -n1 basename)
+.PHONY: all ${FILES} run
 
 INC := -Iinclude
 LNK := -Llib
-LIBS := -lprimes -lm
+LIBS := -lm -lgmp
 
-ALL := --std=c11 $(INC) $(LNK) 
+ALL := --std=c11 -g $(INC) $(LNK) 
 
-all: ${FILES} primes
+all: ${FILES} 
 	echo "Success building $@"
 
 ${FILES}: 
-	gcc $(ALL) solved/$*.c -o bin/$* $(LIBS)
+	gcc $(ALL) solved/$*.c -o bin/`basename $*` $(LIBS)
 
 ${NUMBERS}: 
 	gcc $(ALL) solved/$@.c -o bin/$@ $(LIBS)
 
-primes: include/primes.o
-	gcc -c include/primes.c -o include/primes.o -lm
-include/primes.o: include/primes.c
-	ar -rcs lib/libprimes.a include/primes.o

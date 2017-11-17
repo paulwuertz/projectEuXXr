@@ -1,3 +1,5 @@
+#ifndef NUMBERS
+#define NUMBERS 1
 #include "primes.h"
 #include <stdlib.h>
 
@@ -58,3 +60,11 @@ void getFactors(int val, Array* arr, primFactor* p){
     if (p->prev->val>=p->val && val==1) freePrimfactors(p);
     qsort( arr->arr, arr->used, sizeof(int), compare );
 }
+
+//returns the Nth decimal digit of a number
+//ie. (134,2)-> 1, (134,1)-> 3, (134,0)-> 4
+int decimalDigit(double number,int pos){
+    return ((int)(number/pow(10,pos)))%10;
+}
+
+#endif
