@@ -24,7 +24,7 @@ int main(void)
     size_t len = 0;
     size_t read;
 
-    fp = fopen("99.txt", "r");
+    fp = fopen("resources/99.txt", "r");
     if (fp == NULL) exit(EXIT_FAILURE);
 
     int linenum=0,bigln=-1;

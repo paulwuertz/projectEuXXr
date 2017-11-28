@@ -24,7 +24,7 @@ One part for part < 100 (8 conditions), one for < 100 (one condition) + const fo
 int numLetters[12] = {3,3,5,4,4,3,5,5,4,3,6,6};
 
 int main(int argc, char const *argv[]){
-    long int a = atoi(argv[1]);
+    long int a = 1000;
     int sum=0;
     for (int i = 1; i <= a; ++i){
         int sumO=sum;
