@@ -1,43 +1,12 @@
 #ifndef NUMBERS
 #define NUMBERS 1
+#include "Array.h"
 #include "primes.h"
 #include <stdlib.h>
 
-//doubly linked list for prim number list
-typedef struct Array {
-    int used,size;
-    int* arr;
-} Array;
-
+//compare function for qsort, assumuning a&&b > 0
 int compare( const void* a, const void* b){
-     int int_a = * ( (int*) a );
-     int int_b = * ( (int*) b );
-
-     if ( int_a == int_b ) return 0;
-     else if ( int_a < int_b ) return -1;
-     else return 1;
-}
-
-void initArray(Array* arr,int size){
-    arr->used=0;
-    arr->size=size;
-    arr->arr = (int*) malloc (size*sizeof(int));
-    if(arr->arr==NULL) assert("Init of Array failed...");
-}
-
-
-void freeArray(Array* arr){
-    free(arr->arr);
-}
-
-void addArray(Array* arr,int ele){
-    arr->used++;
-    if(arr->used>arr->size){ 
-        arr->size*=2;
-        arr->arr = (int*) realloc (arr->arr, arr->size * sizeof(int));
-    }
-    if(arr->arr==NULL) assert("Resize of Array failed...");
-    *(arr->arr+arr->used-1)=ele;
+     return ( *(int*)a - *(int*)b );
 }
 
 //recursive function to get all divisors of a number in an dynamic array
@@ -65,6 +34,20 @@ void getFactors(int val, Array* arr, primFactor* p){
 //ie. (134,2)-> 1, (134,1)-> 3, (134,0)-> 4
 int decimalDigit(double number,int pos){
     return ((int)(number/pow(10,pos)))%10;
+}
+
+//return the sum of int a's factors
+int getFactorSum(int a){
+    Array arr;
+    initArray(&arr,64);
+    getFactors(a, &arr, NULL);
+
+    int sum=0;
+    for (int i = 0; i < arr.used-1; ++i){
+        sum+= *(arr.arr+i);
+    }
+    freeArray(&arr);
+    return sum;
 }
 
 #endif

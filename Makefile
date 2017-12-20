@@ -6,7 +6,7 @@ INC := -Iinclude
 LNK := -Llib
 LIBS := -lm -lgmp
 
-ALL := --std=c11 -g $(INC) $(LNK) 
+ALL := --std=c11 -O2 -g $(INC) $(LNK) 
 
 all: ${FILES} 
 	echo "Success building $@"

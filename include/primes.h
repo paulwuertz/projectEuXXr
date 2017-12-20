@@ -27,11 +27,9 @@ void freePrimfactors(primFactor* p);
 
 long long int getKGV(long long int numA,long long int numB);
 
-#include "primes.h"
-
 //the return value, is weather the number is prim(1) or nonprim(0)
 int isPrim_int(int num){
-    if(num%2==0) return 0;
+    if(num%2==0 || num<2) return 0;
     int sqr=sqrt(num);
     for (int i = 3; i < sqr+1; i+=2){
         if (num%i==0) return 0;
@@ -39,7 +37,7 @@ int isPrim_int(int num){
     return 1;
 }
 int isPrim_lint(long int num){
-    if(num%2==0) return 0;
+    if(num%2==0 || num<2) return 0;
     long int sqr=sqrtl(num);
     for (long int i = 3; i < sqr+1; i+=2){
         if (num%i==0) return 0;
@@ -47,7 +45,7 @@ int isPrim_lint(long int num){
     return 1;
 }
 int isPrim_llint(long long int num){
-    if(num%2==0) return 0;
+    if(num%2==0 || num<2) return 0;
     long long int sqr=sqrt(num);
     for (long long int i = 3; i < sqr+1; i+=2){
         if (num%i==0) return 0;
@@ -59,6 +57,7 @@ int isPrim_llint(long long int num){
 //the p list is circular
 void addPrimfactor(long long int num,primFactor* p){
     primFactor* n=malloc(sizeof(primFactor));
+    assert(n && "Prim malloc failed...");
     //next element
     n->val=num;
     n->pow=1;
@@ -73,6 +72,7 @@ void addPrimfactor(long long int num,primFactor* p){
 //returns the primfactors of num
 primFactor* getPrimfactors(long long int num){
     primFactor* p=malloc(sizeof(primFactor));
+    assert(p && "Prim malloc failed...");
     p->next=p;
     p->prev=p;
     p->val=0;
