@@ -19,20 +19,28 @@ the resulting number over the grid form the triangle of pascal :)
 #include <assert.h>
 #include <math.h>
 
-long long int grid[21][21];
-int size=21;
+long long int grid[501][501];
 
 int main(int argc, char const *argv[]){
-    for (int i = 0; i < size; ++i){
+    int t; 
+    scanf("%d",&t);
+    int sizeX, sizeY;
+    for (int i = 0; i < 501; ++i){
         grid[i][0]=1;
+    }
+    for (int i = 0; i < 501; ++i){
         grid[0][i]=1;
     }
-    for (int x = 1; x < size; x++){
-        for (int y = 1; y < size; y++){
-            grid[x][y]=grid[x-1][y]+grid[x][y-1];
+    for(int a0 = 0; a0 < t; a0++){    
+        scanf("%d %d", &sizeX, &sizeY);
+        sizeX++; sizeY++;
+        for (int x = 1; x < sizeX; x++){
+            for (int y = 1; y < sizeY; y++){
+                grid[x][y]= (grid[x-1][y]+grid[x][y-1]) % (1000000000+7);
+            }
         }
+        printf("%llu\n", grid[sizeX-1][sizeY-1] % (1000000000+7));
     }
-    printf("%llu\n", grid[size-1][size-1]);
     return 0;
 }
     
