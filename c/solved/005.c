@@ -114,13 +114,18 @@ void freePrimfactors(primFactor* p){
 
 int main(int argc, char const *argv[]){
     //read Number to calc to
-    long long int a = atoi(argv[1]);
+    int t; 
+    scanf("%d",&t);
+    for(int a0 = 0; a0 < t; a0++){    
+        int a;
+        scanf("%d",&a);
    
-    //calcs common KGV from 2..a
-    long long int c=2;
-    for (long long int i = 3; i <= a; ++i){
-        c=getKGV(c,i);
+        //calcs common KGV from 2..a
+        long long int c=2;
+        for (long long int i = 3; i <= a; ++i){
+            c=getKGV(c,i);
+        }
+        printf("%lli\n", c);
     }
-    printf("%lli\n", c);
     return 0;
 }
