@@ -33,25 +33,31 @@ Breaks if reminder==0.
 #include <math.h>
 
 int main(int argc, char const *argv[]){
-    int num=1,maxlen=1;
-    int reste[1000];
-    for (int n = 1; n < 1000; ++n){
-        int len=0,rest=10;
-        while(rest!=0){
-            rest=(rest*10)%n;
-            reste[len]=rest;
-            for (int i = 0; i < len; ++i){
-                if (reste[i]==rest){
-                    rest=0; //to break the loop
-                    if(len>maxlen){
-                        num=n;
-                        maxlen=len;
-                    } 
+    int t; 
+    scanf("%d",&t);
+    for(int a0 = 0; a0 < t; a0++){    
+        int a;
+        scanf("%d",&a);
+        int num=1,maxlen=0;
+        int reste[10000];
+        for (int n = 1; n < a; ++n){
+            int len=0,rest=10;
+            while(rest!=0){
+                rest=(rest*10)%n;
+                reste[len]=rest;
+                for (int i = 0; i < len; ++i){
+                    if (reste[i]==rest){
+                        rest=0; //to break the loop
+                        if(len>maxlen){
+                            num=n;
+                            maxlen=len;
+                        } 
+                    }
                 }
+                len++;
             }
-            len++;
         }
+        printf("%d\n",num, maxlen);
     }
-    printf("%d %d \n",num, maxlen);
 }
     
