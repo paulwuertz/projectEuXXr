@@ -16,4 +16,5 @@ ${FILES}:
 
 ${NUMBERS}: 
 	gcc $(ALL) solved/$@.c -o bin/$@ $(LIBS)
+	cat hackerrank_in/$@.txt | bin/$@
 
