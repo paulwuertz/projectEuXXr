@@ -16,13 +16,28 @@ Excessive loops.
 #include <assert.h>
 #include <math.h>
 
-int main(int argc, char const *argv[]){
-    for (int c = 1; c < 998; ++c){
-        for (int b = 1; c*c-b*b>0 && b<998 ; ++b){
-            for (int a = 1; c*c-b*b-a*a>=0 && a<998 ; ++a){
-                if(c*c-b*b-a*a==0 && c+b+a==1000) printf("a %d b %d c %d, a*b*c=%i \n", a,b,c,a*b*c);
+int find_triangle(int n){
+    for (int c = 1; c < n-2; c++){
+        for (int b = 1; c*c-b*b>0 && b<n-2 ; b++){
+            for (int a = 1; c*c-b*b-a*a>=0 && a<n-2 ; a++){
+                if(c*c-b*b-a*a==0 && c+b+a==n){
+                    //printf("a %d b %d c %d, a*b*c=%i \n", a,b,c,a*b*c);
+                    return a*b*c;
+                }
             }
         }
+    }
+    return -1;
+}
+
+int main(int argc, char const *argv[]){
+    int t; 
+    scanf("%d",&t);
+    for(int a0 = 0; a0 < t; a0++){
+        
+        int n; 
+        scanf("%d",&n);
+        printf("%i\n", find_triangle(n));
     }
     return 0;
 }
