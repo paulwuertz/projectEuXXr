@@ -24,16 +24,21 @@ and the difference of both.
 #include <math.h>
 
 int main(int argc, char const *argv[]){
-    long int a = atoi(argv[1]);
+    int t; 
+    scanf("%d",&t);
+    for(int a0 = 0; a0 < t; a0++){    
+        int a;
+        scanf("%d",&a);
 
-    long int sumOS=0;
-    for (long int i = 0; i <= a; ++i){
-        sumOS+=i*i;
+        long int sumOS=0;
+        for (long int i = 0; i <= a; ++i){
+            sumOS+=i*i;
+        }
+        long int sqrtOS=(a*a+a)/2;
+        sqrtOS*=sqrtOS;
+
+        printf("%lu\n", sqrtOS-sumOS);
     }
-    long int sqrtOS=(a*a+a)/2;
-    sqrtOS*=sqrtOS;
-
-    printf("%lu-%lu=%lu\n",sqrtOS, sumOS,sqrtOS-sumOS);
     return 0;
 }
     
