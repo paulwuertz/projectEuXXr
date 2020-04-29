@@ -1,7 +1,7 @@
 use std::{
     fs::File,
-    io::prelude::*,
-    env
+    io, fmt, 
+    io::prelude::*
 };
 
 #[derive(Debug, Clone)]
@@ -14,11 +14,30 @@ struct Vertice {
     y_prev: usize,
 }
 
+impl fmt::Display for Vertice {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}/{}|\t\t", self.weight, self.best_value)
+    }
+}
+
+
 #[derive(Debug)]
 struct Lattice {
     x_size : usize,
     y_size : usize,
     vertices: Vec<Vec<Vertice>>,
+}
+
+impl fmt::Display for Lattice {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        for y in 0..self.y_size {
+            for x in 0..self.x_size {
+            write!(f, "{}", self.vertices[x][y])?;
+            }
+            write!(f, "\n")?;
+        }
+        write!(f, "")
+    }
 }
 
 impl Lattice {
@@ -75,6 +94,28 @@ impl Lattice {
             let elements : Vec<&str> = row.split(",").collect();
             for (x, e) in elements.iter().enumerate() {
                 //println!("{}", e);
+                n_lattice.set_weight(x, y, e.parse().unwrap());
+            }
+        }
+        return n_lattice;
+    }
+
+    fn init_weights_from_stdin() -> Lattice {
+        let mut s_n = String::new();
+        io::stdin().read_line(&mut s_n).ok().expect("read error");
+        let n: usize = s_n.trim().parse().ok().expect("parse error");
+        //println!("nlat {}", n);
+
+        let mut n_lattice : Lattice = Lattice::init(n, n);
+        for y in 0..n {
+            let mut row = String::new();
+            io::stdin().read_line(&mut row).ok().expect("read error");
+            row.retain(|c| c != '\n');
+            let elements : Vec<&str> = row.split(" ").collect();
+
+            //println!("e.len() {}", elements.len());
+            for (x, e) in elements.iter().enumerate() {
+                //println!("'{}'", e);
                 n_lattice.set_weight(x, y, e.parse().unwrap());
             }
         }
@@ -177,44 +218,40 @@ impl Lattice {
 }
 
 fn main(){
-    let args: Vec<String> = env::args().collect();
-    if args.len() > 1 {
-        let problem = &args[1];
-        if problem == "81" {
-            let mut l2: Lattice = Lattice::init_weights_from_file(
-                                80, 80, String::from("../resources/p081_matrix.txt")
-                            );
-            l2.shortest_binary_walk();
-            println!("l2 {:?} l2", l2);
-        } else if problem == "82" {
-            let mut l3: Lattice = Lattice::init_weights_from_file(
-                80, 80, String::from("../resources/p082_matrix.txt")
-            );
-            l3.shortest_trinary_walk();
-            let mut min_val = 0x7FFF_FFFF;
-            let mut min_row = 0x7FFF_FFFF;
-            for i in 0..l3.y_size {
-                if l3.get_value(l3.x_size-1, i) < min_val {
-                    min_row = i;
-                    min_val = l3.get_value(l3.x_size-1, i);
-                    println!("l3 {} {}", i, l3.get_value(l3.x_size-1, i));
-                }
+    let mut l2: Lattice = Lattice::init_weights_from_stdin();
+    l2.shortest_binary_walk();
+    //println!("{}", l2);
+    println!("{:?}", l2.get_value(l2.x_size-1, l2.y_size-1));
+    /*} else if problem == "82" {
+        let mut l3: Lattice = Lattice::init_weights_from_file(
+            80, 80, String::from("../resources/p082_matrix.txt")
+        );
+        l3.shortest_trinary_walk();
+        let mut min_val = 0x7FFF_FFFF;
+        let mut min_row = 0x7FFF_FFFF;
+        for i in 0..l3.y_size {
+            if l3.get_value(l3.x_size-1, i) < min_val {
+                min_row = i;
+                min_val = l3.get_value(l3.x_size-1, i);
+                println!("l3 {} {}", i, l3.get_value(l3.x_size-1, i));
             }
-            let mut col = 79;
-            let mut row = min_row;
-            while col != 0 && row != 0 {
-                print!("({}, {}) -> ", col, row);
-                let col_temp = col;
-                col = l3.vertices[col_temp][row].x_prev;
-                row = l3.vertices[col_temp][row].y_prev;
-            }
-            println!("({}, {})!!!", col, row);
-        } /*else {
-            let mut l4: Lattice = Lattice::init_weights_from_file(
-                80, 80, String::from("../resources/p083_matrix.txt")
-            );
-            l4.shortest_quaternal_walk();
-            println!("l4 {:?}", l4);
-        }*/
+        }
+        let mut col = 79;
+        let mut row = min_row;
+        while col != 0 && row != 0 {
+            print!("({}, {}) -> ", col, row);
+            let col_temp = col;
+            col = l3.vertices[col_temp][row].x_prev;
+            row = l3.vertices[col_temp][row].y_prev;
+        }
+        println!("({}, {})!!!", col, row);
+    } else {
+        let mut l4: Lattice = Lattice::init_weights_from_file(
+            80, 80, String::from("../resources/p083_matrix.txt")
+        );
+        l4.shortest_quaternal_walk();
+        println!("l4 {:?}", l4);
     }
+    }
+    */
 }
